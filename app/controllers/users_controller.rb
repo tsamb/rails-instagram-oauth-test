@@ -7,6 +7,12 @@ class UsersController < ApplicationController
     response = Instagram.get_access_token(params[:code], :redirect_uri => "https://floating-wave-4718.herokuapp.com/oauth_callback")
     @user = User.find_by(instagram_token: response.access_token)
     @user = User.create(instagram_token: response.access_token) unless @user
+    session[:user_id] = @user.id
     render :index
+  end
+
+  def logout
+    session.clear
+    redirect_to root_path
   end
 end

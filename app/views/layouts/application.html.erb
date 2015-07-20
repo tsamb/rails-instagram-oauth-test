@@ -7,7 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <header>
+    <% if logged_in? %>
+      <%= link_to "Logout", logout_path %>
+    <% else %>
+      <%= link_to "Sign in with Instagram", instagram_oauth_path %>
+    <% end %>
+  </header>
 <%= yield %>
 
 </body>
